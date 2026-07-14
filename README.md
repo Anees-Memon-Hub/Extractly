@@ -1,4 +1,4 @@
-# 🖼️ Extractify
+# 🖼️ Extractly
 
 A modern Chrome extension that instantly extracts text from screenshots and images using Optical Character Recognition (OCR). Built with **Vite**, **Vanilla JavaScript**, **Chrome Extension Manifest V3**, and **Tesseract.js**, Extractify provides a fast, intuitive, and privacy-focused experience for students, developers, professionals, and researchers.
 
