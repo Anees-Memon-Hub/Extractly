@@ -1,4 +1,6 @@
+# ==========================
 # Logs
+# ==========================
 logs
 *.log
 npm-debug.log*
@@ -7,18 +9,47 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# ==========================
+# Dependencies
+# ==========================
+node_modules/
+
+# ==========================
+# Build Output
+# ==========================
+dist/
+dist-ssr/
+
+# ==========================
+# Environment Files
+# ==========================
+.env
+.env.*
 *.local
 
-# Editor directories and files
+# ==========================
+# Editor Files
+# ==========================
 .vscode/*
 !.vscode/extensions.json
-.idea
+
+.idea/
+
+# ==========================
+# Operating System Files
+# ==========================
 .DS_Store
+Thumbs.db
+
+# ==========================
+# Visual Studio
+# ==========================
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
+
+# ==========================
+# Vim
+# ==========================
 *.sw?
