@@ -1,15 +1,24 @@
-import { UploadZone } from "../components/UploadZone";
+import { initializeImageInputZone, handleImage } from "../components/ImageInputZone";
 import { ImagePreview } from "../components/ImagePreview";
-import { ProgressBar } from "../components/ProgressBar";
 import { TextEditor } from "../components/TextEditor";
-import { Toolbar } from "../components/Toolbar";
+import { Toolbar, initializeToolbar } from "../components/Toolbar";
+import { ProgressBar } from "../components/ProgressBar";
+import { initializeClipboard } from "../services/ClipboardService";
 
-document.querySelector("#upload-zone").innerHTML = UploadZone();
+console.log("Popup initialized");
 
-document.querySelector("#image-preview").innerHTML = ImagePreview();
+// Mount components into their containers
+document.querySelector("#progress-mount").innerHTML = ProgressBar();
+document.querySelector("#preview-mount").innerHTML = ImagePreview();
+document.querySelector("#editor-mount").innerHTML = TextEditor();
+document.querySelector("#toolbar-mount").innerHTML = Toolbar();
 
-document.querySelector("#progress-container").innerHTML = ProgressBar();
+// Wire up interactivity
+initializeImageInputZone();
+initializeToolbar();
 
-document.querySelector("#text-editor").innerHTML = TextEditor();
-
-document.querySelector("#toolbar").innerHTML = Toolbar();
+// Pasting an image anywhere in the popup routes through the same
+// handleImage() path as clicking or dragging a file in.
+initializeClipboard((file) => {
+    handleImage(file);
+});

@@ -1,0 +1,24 @@
+*,
+*::before,
+*::after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+button,
+input,
+textarea{
+    font:inherit;
+}
+
+img{
+    display:block;
+    max-width:100%;
+}
+
+button{
+    cursor:pointer;
+    border:none;
+    background:none;
+}

@@ -1,0 +1,9 @@
+body{
+    width:380px;
+    min-height:100px;
+
+    background:var(--bg);
+    color:var(--text);
+
+    font-family:Inter,"Segoe UI",sans-serif;
+}

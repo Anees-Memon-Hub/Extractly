@@ -1,19 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Extractly</title>
 
+    <link rel="stylesheet" href="/src/styles/reset.css">
+    <link rel="stylesheet" href="/src/styles/variables.css">
+    <link rel="stylesheet" href="/src/styles/global.css">
     <link rel="stylesheet" href="/src/popup/popup.css">
+
 </head>
 
 <body>
 
-    <!-- UI goes here -->
+    <main class="app">
 
-    <script type="module" src="/src/popup/popup.js"></script>
+        <!-- Header -->
+
+        <header class="header">
+
+            <h1>Extractly</h1>
+
+            <p>Extract text from screenshots in seconds.</p>
+
+        </header>
+
+        <!-- Image Input Zone -->
+
+        <section class="card image-input-zone" id="image-input-zone" tabindex="0">
+
+            <div class="image-input-icon">
+
+                📷
+
+            </div>
+
+            <h2>Paste Screenshot</h2>
+
+            <div class="image-input-shortcut">
+
+                Ctrl + V
+
+            </div>
+
+            <div class="image-input-divider">
+
+                OR
+
+            </div>
+
+            <div class="image-input-secondary">
+
+                Drag & Drop Image
+
+            </div>
+
+            <div class="image-input-secondary coming-soon">
+
+                Browse Image <span>(Coming Soon)</span>
+
+            </div>
+
+            <input
+                type="file"
+                id="image-input"
+                accept="image/*"
+                hidden>
+
+        </section>
+
+        <!-- Progress (mounted by ProgressBar.js) -->
+
+        <div id="progress-mount"></div>
+
+        <!-- Preview (mounted by ImagePreview.js) -->
+
+        <section class="card" id="preview-mount"></section>
+
+        <!-- OCR Output (mounted by TextEditor.js + Toolbar.js) -->
+
+        <section class="card output-card">
+
+            <div class="output-card__body" id="editor-mount"></div>
+
+            <div class="output-card__footer" id="toolbar-mount"></div>
+
+        </section>
+
+    </main>
+
+    <script
+        type="module"
+        src="/src/popup/popup.js"></script>
 
 </body>
+
 </html>
