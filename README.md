@@ -223,11 +223,8 @@ Include screenshots of:
 
 <img width="295" height="261" alt="image" src="https://github.com/user-attachments/assets/eebcb159-7bad-4b48-9868-9842e3e56618" />
 
-* Drag-and-drop upload
-* Image preview
-* OCR progress indicator
-* Extracted text editor
-* Completed extraction results
+<img width="289" height="407" alt="image" src="https://github.com/user-attachments/assets/96b64603-687e-4708-bba4-ee819b9b6225" />
+
 
 ---
 
