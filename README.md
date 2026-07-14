@@ -99,7 +99,7 @@ The extension is designed with usability in mind, supporting drag-and-drop uploa
 # 📁 Project Structure
 
 ```text
-Extractify
+Extractly
 │
 ├── public
 │   ├── icons
@@ -149,13 +149,13 @@ Extractify
 Clone the repository:
 
 ```bash
-git clone https://github.com/Anees-Memon-Hub/Extractify.git
+git clone https://github.com/Anees-Memon-Hub/Extractly.git
 ```
 
 Navigate into the project:
 
 ```bash
-cd Extractify
+cd Extractly
 ```
 
 Install dependencies:
@@ -184,7 +184,7 @@ npm run build
 2. Enable **Developer Mode**
 3. Click **Load unpacked**
 4. Select the generated extension folder
-5. Pin **Extractify** to the Chrome toolbar
+5. Pin **Extractly** to the Chrome toolbar
 
 ---
 
