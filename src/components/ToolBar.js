@@ -26,6 +26,9 @@ export function initializeToolbar() {
         return;
     }
 
+    const copyBtnDefaultLabel = copyBtn.textContent;
+    let copiedTimeoutId = null;
+
     function updateButtonStates() {
         const hasText = textarea.value.length > 0;
         clearBtn.disabled = !hasText;
@@ -47,6 +50,18 @@ export function initializeToolbar() {
 
         try {
             await copyToClipboard(text);
+
+            // Brief visual confirmation using the existing .copied style.
+            if (copiedTimeoutId) clearTimeout(copiedTimeoutId);
+
+            copyBtn.classList.add("copied");
+            copyBtn.textContent = "Copied";
+
+            copiedTimeoutId = setTimeout(() => {
+                copyBtn.classList.remove("copied");
+                copyBtn.textContent = copyBtnDefaultLabel;
+                copiedTimeoutId = null;
+            }, 1500);
         } catch (err) {
             console.error("Copy failed:", err);
         }
