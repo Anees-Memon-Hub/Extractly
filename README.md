@@ -1,14 +1,16 @@
 # 🖼️ Extractly
 
-A modern Chrome extension that instantly extracts text from screenshots and images using Optical Character Recognition (OCR). Built with **Vite**, **Vanilla JavaScript**, **Chrome Extension Manifest V3**, and **Tesseract.js**, Extractify provides a fast, intuitive, and privacy-focused experience for students, developers, professionals, and researchers.
+A modern Chrome extension that extracts editable text from **images, screenshots, and text-based PDF documents**. Built with **Vite**, **Vanilla JavaScript**, **Chrome Extension Manifest V3**, **Tesseract.js**, and **PDF.js**, Extractly provides a fast, intuitive, and privacy-focused text extraction experience.
 
 ---
 
 # ✨ Overview
 
-Extractify is a lightweight OCR-powered Chrome extension that enables users to extract editable text from images directly within their browser. Whether you're copying notes from screenshots, digitizing printed documents, or extracting code snippets from images, Extractify streamlines the entire process with an elegant and responsive interface.
+Extractly is a lightweight browser-based text extraction extension that allows users to extract editable text from images and PDF documents directly within Chrome.
 
-The extension is designed with usability in mind, supporting drag-and-drop uploads, clipboard paste, automatic OCR processing, editable output, and multiple export options.
+Whether you're copying notes from lecture screenshots, digitizing printed documents, extracting code snippets from images, or retrieving text from PDF files, Extractly streamlines the process through a simple interface.
+
+The extension supports image uploads, drag-and-drop input, clipboard screenshots, PDF uploads, automatic OCR processing for images, PDF text extraction, editable output, and text export options.
 
 ---
 
@@ -19,46 +21,87 @@ The extension is designed with usability in mind, supporting drag-and-drop uploa
 * Extract text from screenshots and image files
 * Automatic OCR processing after image selection
 * High-quality recognition powered by **Tesseract.js**
-* Supports handwritten-friendly and printed text recognition
+* Support for printed and handwritten-style text recognition
 * Editable extracted text before copying or saving
+* Live OCR progress indication
+
+---
+
+## 📄 PDF Text Extraction
+
+* Upload PDF documents directly through the dedicated PDF input area
+* Extract text from text-based PDF documents
+* PDF processing powered by **PDF.js**
+* Multi-page PDF text extraction
+* Preserves page order during extraction
+* Extracted PDF text appears directly in the editable text editor
+
+> **Current limitation:** Scanned/image-only PDFs are not yet processed through OCR. Scanned PDF OCR is planned as a future improvement.
 
 ---
 
 ## 📂 Flexible Image Input
 
 * Upload images from your device
-* Drag and drop support
+* Drag and drop image support
 * Paste screenshots directly using **Ctrl + V**
-* Instant image preview before processing
-* Supports common image formats (PNG, JPG, JPEG, WEBP)
+* Instant image preview
+* Supports common image formats such as:
+
+  * PNG
+  * JPG
+  * JPEG
+  * WEBP
+
+---
+
+## 📑 Dedicated Image & PDF Input
+
+Extractly provides separate input areas for different document types:
+
+### Image Extraction
+
+* Paste Screenshot
+* Drag & Drop Image
+* Browse Image
+
+### PDF Extraction
+
+* Upload PDF
+* Drag & Drop PDF
+
+This keeps the workflow simple and makes it clear which type of document is being processed.
 
 ---
 
 ## ⚡ Fast User Experience
 
-* Automatic OCR starts immediately after image selection
+* Automatic OCR starts after image selection
+* Fast PDF text extraction
 * Live extraction progress indicator
-* Smooth loading animations
-* Responsive interface
-* Lightweight Chrome extension with fast startup time
+* Smooth loading states
+* Responsive popup interface
+* Lightweight Chrome extension
+* Fast startup and processing
 
 ---
 
 ## 🌍 Multi-Language Recognition
 
-* OCR support for multiple languages
-* Easy language configuration
-* Optimized recognition engine for improved accuracy
+* OCR support through Tesseract.js language models
+* Language configuration support
+* Designed for multilingual text extraction
+* Local OCR processing
 
 ---
 
 ## 📋 Text Management
 
 * Edit extracted text
-* Copy text with a single click
+* Copy extracted text with a single click
 * Download extracted text as a file
 * Clear extracted content
-* Save results for later use
+* Save extracted results for later use
 
 ---
 
@@ -67,6 +110,7 @@ The extension is designed with usability in mind, supporting drag-and-drop uploa
 * Clean and minimal design
 * Glassmorphism-inspired components
 * Responsive popup layout
+* Separate image and PDF workflows
 * Smooth transitions and animations
 * Accessibility-focused interface
 
@@ -74,11 +118,14 @@ The extension is designed with usability in mind, supporting drag-and-drop uploa
 
 ## 🔒 Privacy First
 
-* OCR processing performed locally using **Tesseract.js**
-* Images are not uploaded to external servers
-* No user accounts required
-* No cloud processing
-* Secure local workflow
+Extractly is designed around local processing.
+
+* Image OCR is performed locally using **Tesseract.js**
+* PDF text extraction is performed locally using **PDF.js**
+* Images and PDF documents are not uploaded to an external OCR server
+* No user account is required
+* No cloud OCR processing is required
+* Documents remain within the local browser workflow
 
 ---
 
@@ -89,8 +136,10 @@ The extension is designed with usability in mind, supporting drag-and-drop uploa
 | Extension Platform | Chrome Extension Manifest V3    |
 | Frontend           | Vanilla JavaScript (ES Modules) |
 | Build Tool         | Vite                            |
-| OCR Engine         | Tesseract.js                    |
-| Styling            | HTML5, CSS3                     |
+| Image OCR Engine   | Tesseract.js                    |
+| PDF Processing     | PDF.js (`pdfjs-dist`)           |
+| Markup             | HTML5                           |
+| Styling            | CSS3                            |
 | Package Manager    | npm                             |
 | Version Control    | Git & GitHub                    |
 
@@ -107,14 +156,28 @@ Extractly
 │
 ├── src
 │   ├── components
+│   │   ├── ImageInputZone.js
+│   │   ├── ImagePreview.js
+│   │   ├── ProgressBar.js
+│   │   ├── TextEditor.js
+│   │   └── ToolBar.js
+│   │
 │   ├── services
+│   │   ├── OCRService.js
+│   │   └── PDFService.js
+│   │
 │   ├── styles
+│   │   ├── reset.css
+│   │   ├── variables.css
+│   │   └── global.css
+│   │
 │   ├── utils
+│   │
 │   └── popup
-│       ├── popup.html
 │       ├── popup.css
 │       └── popup.js
 │
+├── popup.html
 ├── vite.config.js
 ├── package.json
 └── README.md
@@ -124,13 +187,39 @@ Extractly
 
 # ⚙️ Core Workflow
 
-1. Open the Extractify extension.
-2. Upload an image, drag and drop it, or paste a screenshot using **Ctrl + V**.
-3. Preview the selected image.
-4. OCR processing begins automatically.
-5. Monitor extraction progress.
-6. Edit the extracted text if needed.
-7. Copy, download, save, or clear the extracted text.
+## 🖼️ Image Workflow
+
+```text
+Image / Screenshot
+       ↓
+Image Input
+       ↓
+Image Preview
+       ↓
+Tesseract.js OCR
+       ↓
+Progress Indicator
+       ↓
+Editable Text
+       ↓
+Copy / Download / Save
+```
+
+## 📄 PDF Workflow
+
+```text
+PDF Document
+       ↓
+PDF Input
+       ↓
+PDF.js
+       ↓
+Text Extraction
+       ↓
+Editable Text
+       ↓
+Copy / Download / Save
+```
 
 ---
 
@@ -139,7 +228,7 @@ Extractly
 ## Prerequisites
 
 * Node.js 18 or later
-* Google Chrome or any Chromium-based browser
+* Google Chrome or another Chromium-based browser
 * npm
 
 ---
@@ -180,57 +269,105 @@ npm run build
 
 # 📦 Load the Extension in Chrome
 
-1. Open **chrome://extensions**
-2. Enable **Developer Mode**
-3. Click **Load unpacked**
-4. Select the generated extension folder
-5. Pin **Extractly** to the Chrome toolbar
+1. Run the production build:
+
+```bash
+npm run build
+```
+
+2. Open:
+
+```text
+chrome://extensions
+```
+
+3. Enable **Developer Mode**.
+
+4. Click **Load unpacked**.
+
+5. Select the generated:
+
+```text
+dist
+```
+
+folder.
+
+6. Pin **Extractly** to the Chrome toolbar.
+
+7. Open the extension and test image or PDF extraction.
 
 ---
 
 # 🎯 Use Cases
 
 * Extract notes from lecture screenshots
-* Copy text from scanned documents
+* Copy text from scanned images
 * Digitize printed materials
 * Extract code snippets from images
 * Convert screenshots into editable text
-* Save information from presentations
-* Research and academic workflows
+* Extract text from PDF documents
+* Retrieve text from presentations
+* Academic and research workflows
 * Professional document processing
+* Quickly convert visual information into editable text
 
 ---
 
 # 🔮 Future Improvements
 
+## PDF & OCR
+
+* Scanned PDF OCR
+* Automatic detection of text-based vs scanned PDFs
+* OCR processing for image-only PDF pages
+* Multi-page PDF OCR progress tracking
+
+## Image Processing
+
 * Batch image processing
-* PDF OCR support
 * Region selection and cropping
+* Image preprocessing for improved OCR accuracy
 * Automatic language detection
+
+## Text & Export
+
 * Searchable OCR history
-* Export to PDF, DOCX, and Markdown
-* Cloud synchronization
-* Dark and Light themes
-* Keyboard shortcuts
+* Export to PDF
+* Export to DOCX
+* Export to Markdown
+* Improved text formatting preservation
 * AI-assisted text cleanup
+
+## User Experience
+
+* Dark and light themes
+* Custom keyboard shortcuts
+* Improved accessibility
 * Offline language pack management
+* Drag-and-drop improvements
+* Advanced document preview
+
+## Synchronization
+
+* Optional cloud synchronization
+* Cross-device settings synchronization
 
 ---
 
 # 📸 Screenshots
 
-<img width="295" height="261" alt="image" src="https://github.com/user-attachments/assets/eebcb159-7bad-4b48-9868-9842e3e56618" />
+<img width="295" height="261" alt="Extractly screenshot" src="https://github.com/user-attachments/assets/eebcb159-7bad-4b48-9868-9842e3e56618" />
 
-<img width="289" height="407" alt="image" src="https://github.com/user-attachments/assets/96b64603-687e-4708-bba4-ee819b9b6225" />
-
+<img width="289" height="407" alt="Extractly screenshot" src="https://github.com/user-attachments/assets/96b64603-687e-4708-bba4-ee819b9b6225" />
 
 ---
 
 # 👨‍💻 Developer
 
-| Name            | GitHub                             |
-| --------------- | ---------------------------------- |
-| **Anees Memon** | https://github.com/Anees-Memon-Hub |
+| Name            | GitHub                                                |
+| --------------- | ----------------------------------------------------- |
+| **Anees Memon** | [Anees-Memon-Hub](https://github.com/Anees-Memon-Hub) |
 
 ---
 
@@ -241,16 +378,20 @@ Contributions, feature requests, and bug reports are welcome.
 If you'd like to contribute:
 
 1. Fork the repository.
-2. Create a new feature branch.
-3. Commit your changes.
-4. Push the branch.
-5. Open a Pull Request.
+2. Create a feature branch.
+3. Make your changes.
+4. Run the project tests/build.
+5. Commit your changes using a clear commit message.
+6. Push your branch.
+7. Open a Pull Request.
 
 ---
 
 # ⭐ Support
 
-If you found this project useful, consider giving it a **⭐ Star** on GitHub. Your support helps improve the project and encourages future development.
+If you found Extractly useful, consider giving the project a **⭐ Star** on GitHub.
+
+Your support helps the project grow and encourages future development.
 
 ---
 
