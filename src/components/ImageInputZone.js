@@ -60,13 +60,19 @@ export async function handleImage(file) {
     showProgress(0);
 
     try {
-        const text = await extractTextFromImage(file, (fraction) => {
-            showProgress(fraction);
-        });
+        let text;
+
+        if (file.type === "application/pdf") {
+            text = await extractTextFromPDF(file);
+        } else {
+            text = await extractTextFromImage(file, (fraction) => {
+                showProgress(fraction);
+            });
+        }
 
         setExtractedText(text);
     } catch (err) {
-        console.error("OCR failed. Full details:", {
+        console.error("Extraction failed. Full details:", {
             err,
             message: err?.message,
             stack: err?.stack,
