@@ -1,36 +1,26 @@
 /* ===========================
-   DESIGN TOKENS
+   POPUP-LOCAL TOKENS
+   (built on top of variables.css —
+   does not redeclare --bg, --surface,
+   --primary, --text, --border, etc.)
 =========================== */
 
 :root {
-    --bg: #0f1117;
-    --card-bg: #171a21;
-    --card-bg-hover: #1c2029;
-    --border: rgba(255, 255, 255, 0.08);
-    --border-strong: rgba(255, 255, 255, 0.14);
-
-    --text-primary: #f3f4f6;
-    --text-secondary: #9ca3af;
-    --text-muted: #6b7280;
-
-    --accent: #4f8cff;
-    --accent-soft: rgba(79, 140, 255, 0.12);
-    --accent-strong: #6ea0ff;
-
-    --success: #34d399;
-    --success-soft: rgba(52, 211, 153, 0.12);
-
-    --radius-lg: 18px;
-    --radius-md: 12px;
-    --radius-sm: 8px;
     --radius-pill: 999px;
 
-    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.28);
-    --shadow-lift: 0 12px 32px rgba(0, 0, 0, 0.36);
+    --shadow-lift: 0 16px 40px rgba(0, 0, 0, 0.4);
+
+    --accent-soft: color-mix(in srgb, var(--primary) 12%, transparent);
+    --success-soft: color-mix(in srgb, var(--success) 12%, transparent);
+
+    --text-faint: color-mix(in srgb, var(--text-muted) 70%, transparent);
 }
 
 /* ===========================
    POPUP LAYOUT
+   (width/background/font-family/color
+   already come from global.css's body rule —
+   this only adds what that rule doesn't cover)
 =========================== */
 
 * {
@@ -38,16 +28,8 @@
 }
 
 body {
-    width: 400px;
     max-height: 600px;
-
-    margin: 0;
     overflow-y: auto;
-
-    background: var(--bg);
-    color: var(--text-primary);
-
-    font-family: Inter, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -62,7 +44,7 @@ body::-webkit-scrollbar-thumb {
 .app {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
 
     padding: 20px;
 }
@@ -75,31 +57,27 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
 
     text-align: center;
-    padding-bottom: 4px;
+    padding-bottom: 2px;
 }
 
 .header h1 {
     margin: 0;
 
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 700;
-    letter-spacing: -0.01em;
-
-    background: linear-gradient(90deg, #ffffff, #b9c6ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    letter-spacing: -0.015em;
+    color: var(--text);
 }
 
 .header p {
     margin: 0;
 
-    max-width: 320px;
+    max-width: 290px;
 
-    color: var(--text-secondary);
+    color: var(--text-muted);
 
     font-size: 12.5px;
     line-height: 1.5;
@@ -110,17 +88,17 @@ body::-webkit-scrollbar-thumb {
 =========================== */
 
 .card {
-    background: var(--card-bg);
+    background: var(--surface);
 
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
 
     padding: 18px;
 
-    box-shadow: var(--shadow-card);
+    box-shadow: var(--shadow);
 
     animation: card-in 0.25s ease both;
-    transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
 }
 
 @keyframes card-in {
@@ -135,78 +113,91 @@ body::-webkit-scrollbar-thumb {
 }
 
 /* ===========================
-   IMAGE INPUT ZONE
+   IMAGE / PDF INPUT ZONES
 =========================== */
 
-.image-input-zone {
+.image-input-zone,
+.pdf-input-zone {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    gap: 12px;
+    gap: 10px;
 
-    min-height: 190px;
+    min-height: 176px;
 
-    border: 2px dashed var(--border-strong);
+    border: 1.5px dashed var(--border);
     border-radius: var(--radius-lg);
 
     cursor: pointer;
     text-align: center;
 
-    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    transition: border-color var(--transition), background var(--transition), transform var(--transition);
 }
 
 .image-input-zone:hover,
-.image-input-zone:focus-visible {
-    border-color: var(--accent);
+.image-input-zone:focus-visible,
+.pdf-input-zone:hover,
+.pdf-input-zone:focus-visible {
+    border-color: var(--primary);
     background: var(--accent-soft);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
-.image-input-zone:active {
+.image-input-zone:active,
+.pdf-input-zone:active {
     transform: translateY(0);
 }
 
-.image-input-zone.dragging {
-    border-color: var(--accent-strong);
+.image-input-zone.dragging,
+.pdf-input-zone.dragging {
+    border-color: var(--primary-hover);
     background: var(--accent-soft);
 }
 
-.image-input-icon {
+.image-input-icon,
+.pdf-input-icon {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
 
     border-radius: 50%;
     background: var(--accent-soft);
-
-    font-size: 26px;
+    color: var(--primary);
 }
 
-.image-input-zone h2 {
+.image-input-icon svg,
+.pdf-input-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.image-input-zone h2,
+.pdf-input-zone h2 {
     margin: 0;
 
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 600;
+    color: var(--text);
 }
 
 .image-input-shortcut {
-    padding: 6px 14px;
+    padding: 5px 12px;
 
     border-radius: var(--radius-pill);
 
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid var(--border-strong);
+    background: var(--surface-light);
+    border: 1px solid var(--border);
 
     font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 600;
 
-    color: var(--text-secondary);
+    color: var(--text-muted);
 }
 
 .image-input-divider {
@@ -216,11 +207,9 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     gap: 10px;
 
-    color: var(--text-muted);
+    color: var(--text-faint);
 
-    font-size: 10.5px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+    font-size: 11.5px;
 }
 
 .image-input-divider::before,
@@ -231,8 +220,9 @@ body::-webkit-scrollbar-thumb {
     background: var(--border);
 }
 
-.image-input-secondary {
-    color: var(--text-secondary);
+.image-input-secondary,
+.pdf-input-secondary {
+    color: var(--text-muted);
     font-size: 12.5px;
 }
 
@@ -242,7 +232,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .coming-soon span {
-    opacity: 0.55;
+    opacity: 0.5;
 }
 
 .coming-soon::after {
@@ -254,13 +244,11 @@ body::-webkit-scrollbar-thumb {
     padding: 3px 9px;
     border-radius: var(--radius-pill);
 
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--text-muted);
+    background: var(--surface-light);
+    color: var(--text-faint);
 
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    font-size: 10.5px;
+    font-weight: 600;
 }
 
 /* ===========================
@@ -276,7 +264,7 @@ body::-webkit-scrollbar-thumb {
     height: 4px;
 
     border-radius: var(--radius-pill);
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--surface-light);
 
     overflow: hidden;
 }
@@ -285,10 +273,10 @@ body::-webkit-scrollbar-thumb {
     height: 100%;
     width: 0%;
 
-    background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+    background: linear-gradient(90deg, var(--primary), var(--primary-hover));
     border-radius: var(--radius-pill);
 
-    transition: width 0.2s ease;
+    transition: width var(--transition);
 }
 
 /* ===========================
@@ -296,7 +284,7 @@ body::-webkit-scrollbar-thumb {
 =========================== */
 
 .image-preview {
-    min-height: 150px;
+    min-height: 146px;
     padding: 14px;
 
     display: flex;
@@ -313,19 +301,23 @@ body::-webkit-scrollbar-thumb {
 }
 
 .image-preview.empty span {
-    color: var(--text-muted);
+    color: var(--text-faint);
     font-size: 13px;
 }
 
 /* ===========================
    OUTPUT / EXTRACTED TEXT
-   (primary content — sized up
-   and given real structure)
+   (the destination of the whole
+   flow — one deliberate step up
+   in elevation from the input cards)
 =========================== */
 
 .output-card {
     padding: 0;
     overflow: hidden;
+
+    border-top: 2px solid var(--primary);
+    box-shadow: var(--shadow-lift);
 }
 
 .output-card__body {
@@ -334,7 +326,7 @@ body::-webkit-scrollbar-thumb {
 
 .output-card textarea {
     width: 100%;
-    min-height: 220px;
+    min-height: 210px;
     max-height: 340px;
 
     resize: vertical;
@@ -343,7 +335,7 @@ body::-webkit-scrollbar-thumb {
     outline: none;
     background: transparent;
 
-    color: var(--text-primary);
+    color: var(--text);
 
     font-size: 14.5px;
     line-height: 1.75;
@@ -351,7 +343,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .output-card textarea::placeholder {
-    color: var(--text-muted);
+    color: var(--text-faint);
 }
 
 .output-card__footer {
@@ -385,23 +377,23 @@ body::-webkit-scrollbar-thumb {
 
     padding: 9px 16px;
 
-    border: 1px solid var(--border-strong);
+    border: 1px solid var(--border);
     border-radius: var(--radius-md);
 
-    background: rgba(255, 255, 255, 0.04);
-    color: var(--text-primary);
+    background: var(--surface-light);
+    color: var(--text);
 
     font-size: 13px;
     font-weight: 600;
     font-family: inherit;
 
     cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    transition: background var(--transition), border-color var(--transition), transform 0.15s ease;
 }
 
 .btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--border-strong);
+    background: var(--surface);
+    border-color: var(--border);
 }
 
 .btn:active {
@@ -409,30 +401,30 @@ body::-webkit-scrollbar-thumb {
 }
 
 .btn:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--primary);
     outline-offset: 2px;
 }
 
 .btn-primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #0a0f1a;
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--text);
 }
 
 .btn-primary:hover {
-    background: var(--accent-strong);
-    border-color: var(--accent-strong);
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
 }
 
 .btn-ghost {
     background: transparent;
     border-color: transparent;
-    color: var(--text-secondary);
+    color: var(--text-muted);
 }
 
 .btn-ghost:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--text-primary);
+    background: var(--surface-light);
+    color: var(--text);
 }
 
 .btn.copied {
@@ -456,7 +448,7 @@ body::-webkit-scrollbar-thumb {
     height: 16px;
 
     border: 2px solid rgba(255, 255, 255, 0.25);
-    border-top-color: var(--text-primary);
+    border-top-color: var(--text);
     border-radius: 50%;
 
     animation: spin 0.7s linear infinite;
@@ -481,16 +473,16 @@ body::-webkit-scrollbar-thumb {
     padding-top: 2px;
 
     font-size: 11px;
-    color: var(--text-muted);
+    color: var(--text-faint);
 }
 
 .footer a {
-    color: var(--text-secondary);
+    color: var(--text-muted);
     text-decoration: none;
 }
 
 .footer a:hover {
-    color: var(--accent);
+    color: var(--primary);
     text-decoration: underline;
 }
 

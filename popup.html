@@ -2,20 +2,16 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0">
-
     <title>Extractly</title>
 
     <link rel="stylesheet" href="/src/styles/reset.css">
     <link rel="stylesheet" href="/src/styles/variables.css">
     <link rel="stylesheet" href="/src/styles/global.css">
     <link rel="stylesheet" href="/src/popup/popup.css">
-
 </head>
 
 <body>
@@ -23,49 +19,42 @@
     <main class="app">
 
         <!-- Header -->
-
         <header class="header">
-
             <h1>Extractly</h1>
-
-            <p>Extract text from screenshots in seconds.</p>
-
+            <p>Extract text from images and PDFs in seconds.</p>
         </header>
 
         <!-- Image Input Zone -->
-
-        <section class="card image-input-zone" id="image-input-zone" tabindex="0">
+        <section
+            class="card image-input-zone"
+            id="image-input-zone"
+            tabindex="0">
 
             <div class="image-input-icon">
-
-                📷
-
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="5" width="18" height="14" rx="2.5"></rect>
+                    <circle cx="9" cy="11" r="1.6"></circle>
+                    <path d="M21 16l-5.2-5-4.3 4.2"></path>
+                    <path d="M13 19l-3.5-3.4L4 21"></path>
+                </svg>
             </div>
 
-            <h2>Paste Screenshot</h2>
+            <h2>Extract from Image</h2>
 
             <div class="image-input-shortcut">
-
                 Ctrl + V
-
             </div>
 
             <div class="image-input-divider">
-
-                OR
-
+                or
             </div>
 
             <div class="image-input-secondary">
-
                 Drag & Drop Image
-
             </div>
 
-            <div class="image-input-secondary coming-soon">
-
-                Browse Image <span>(Coming Soon)</span>
-
+            <div class="image-input-secondary">
+                Browse Image
             </div>
 
             <input
@@ -76,21 +65,58 @@
 
         </section>
 
-        <!-- Progress (mounted by ProgressBar.js) -->
+        <!-- PDF Input Zone -->
+        <section
+            class="card pdf-input-zone"
+            id="pdf-input-zone"
+            tabindex="0">
 
+            <div class="pdf-input-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <path d="M14 2v6h6"></path>
+                </svg>
+            </div>
+
+            <h2>Extract from PDF</h2>
+
+            <div class="pdf-input-secondary">
+                Upload PDF
+            </div>
+
+            <div class="pdf-input-secondary">
+                Drag & Drop PDF
+            </div>
+
+            <input
+                type="file"
+                id="pdf-input"
+                accept="application/pdf,.pdf"
+                hidden>
+
+        </section>
+
+        <!-- Progress (mounted by ProgressBar.js) -->
         <div id="progress-mount"></div>
 
         <!-- Preview (mounted by ImagePreview.js) -->
-
-        <section class="card" id="preview-mount"></section>
+        <section
+            class="card"
+            id="preview-mount">
+        </section>
 
         <!-- OCR Output (mounted by TextEditor.js + Toolbar.js) -->
-
         <section class="card output-card">
 
-            <div class="output-card__body" id="editor-mount"></div>
+            <div
+                class="output-card__body"
+                id="editor-mount">
+            </div>
 
-            <div class="output-card__footer" id="toolbar-mount"></div>
+            <div
+                class="output-card__footer"
+                id="toolbar-mount">
+            </div>
 
         </section>
 
@@ -98,7 +124,8 @@
 
     <script
         type="module"
-        src="/src/popup/popup.js"></script>
+        src="/src/popup/popup.js">
+    </script>
 
 </body>
 
