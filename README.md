@@ -357,9 +357,11 @@ folder.
 
 # 📸 Screenshots
 
-<img width="295" height="261" alt="Extractly screenshot" src="https://github.com/user-attachments/assets/eebcb159-7bad-4b48-9868-9842e3e56618" />
+<img width="284" height="391" alt="image" src="https://github.com/user-attachments/assets/db12af58-86dd-4488-ab85-89ad4027d625" />
 
-<img width="289" height="407" alt="Extractly screenshot" src="https://github.com/user-attachments/assets/96b64603-687e-4708-bba4-ee819b9b6225" />
+
+<img width="286" height="397" alt="image" src="https://github.com/user-attachments/assets/31447d7d-eb12-4659-8947-07677bed614d" />
+
 
 ---
 
