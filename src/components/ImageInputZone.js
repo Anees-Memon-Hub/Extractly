@@ -2,6 +2,7 @@ import { renderPreviewImage } from "./ImagePreview";
 import { setExtractedText } from "./TextEditor";
 import { showProgress, hideProgress } from "./ProgressBar";
 import { extractTextFromImage } from "../services/OCRService";
+import { extractTextFromPDF } from "../services/PDFService";
 
 export function initializeImageInputZone() {
     console.log("ImageInputZone initialized");
@@ -44,12 +45,15 @@ export function initializeImageInputZone() {
 }
 
 export async function handleImage(file) {
-    if (!file || !file.type.startsWith("image/")) {
-        console.warn("Selected file is not an image.");
+    if (
+        !file ||
+        (!file.type.startsWith("image/") && file.type !== "application/pdf")
+    ) {
+        console.warn("Selected file is not a supported file type.");
         return;
     }
 
-    console.log("Image selected:", file.name || "(pasted image)");
+    console.log("File selected:", file.name || "(pasted image)");
 
     renderPreviewImage(file);
     setExtractedText("");
@@ -59,6 +63,7 @@ export async function handleImage(file) {
         const text = await extractTextFromImage(file, (fraction) => {
             showProgress(fraction);
         });
+
         setExtractedText(text);
     } catch (err) {
         console.error("OCR failed. Full details:", {
